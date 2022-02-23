@@ -22,33 +22,6 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: const MoviesPage(),
-      bottomSheet: GetBuilder<MovieController>(
-        init: MovieController(),
-        builder: (controller) => Row(
-          children: [
-            Expanded(
-                child: IconButton(
-                    onPressed: () => controller.skip("back"),
-                    icon: const Icon(Icons.arrow_back))),
-            Expanded(
-                child: IconButton(
-                    onPressed: () => controller.skip("prev"),
-                    icon: const Icon(Icons.arrow_back_ios))),
-            Text(controller.page.toString(),
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Expanded(
-              child: IconButton(
-                  onPressed: () => controller.skip("next"),
-                  icon: const Icon(Icons.arrow_forward_ios)),
-            ),
-            Expanded(
-                child: IconButton(
-                    onPressed: () => controller.skip("skip"),
-                    icon: const Icon(Icons.arrow_forward))),
-          ],
-        ),
-      ),
     );
   }
 }
