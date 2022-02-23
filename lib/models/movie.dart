@@ -26,6 +26,10 @@ class Movie {
   });
 
   static fromJson(Map<String, dynamic> json) {
+    var average = json['vote_average'].runtimeType == int
+        ? json['vote_average'].toDouble()
+        : json['vote_average'];
+
     return Movie(
       id: json['id'] ?? 0,
       adult: json['adult'] ?? false,
@@ -37,7 +41,7 @@ class Movie {
       releaseDate: json['release_date'] ?? "",
       title: json['title'] ?? "",
       video: json['video'] ?? false,
-      voteAverage: json['vote_average'] ?? 0.0,
+      voteAverage: average,
       voteCount: json['vote_count'] ?? 0,
     );
   }

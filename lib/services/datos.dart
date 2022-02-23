@@ -10,19 +10,16 @@ class Data {
   static const baseUrl = 'https://api.themoviedb.org/3/';
 
   Future loadMovies(int page) async {
-    try {
-      var conexion = Conexion();
-      conexion.setDio(baseUrl);
-      var response =
-          await conexion.dio.get("/movie/popular?api_key=$apiKey&page=$page");
-      List<dynamic> data = response.data["results"];
-      return {
-        "state": true,
-        "response": data.map((e) => Movie.fromJson(response.data)).toList()
-      };
-    } catch (e) {
-      print(e.toString());
-      return {"state": false, "response": e.toString()};
-    }
+    // try {
+    var conexion = Conexion();
+    conexion.setDio(baseUrl);
+    var response =
+        await conexion.dio.get("/movie/popular?api_key=$apiKey&page=$page");
+    var data = response.data["results"];
+    return {"state": true, "response": data};
+    // } catch (e) {
+    //   print(e.toString());
+    //   return {"state": false, "response": e.toString()};
+    // }
   }
 }

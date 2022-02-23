@@ -18,7 +18,11 @@ class MovieController extends GetxController {
     load = true;
     var response = await Data.instance.loadMovies(1);
     if (response["state"]) {
-      movies = response["response"];
+      var data = response["response"];
+      data.forEach((element) {
+        movies.add(Movie.fromJson(element));
+      });
+      print(movies.length);
       load = false;
       update();
     } else {
