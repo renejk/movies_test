@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movies_test/models/movie.dart';
 import 'package:movies_test/services/datos.dart';
@@ -8,7 +7,6 @@ class MovieController extends GetxController {
   bool load = false, reload = false;
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     await loadMovies();
   }

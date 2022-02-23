@@ -1,4 +1,3 @@
-import 'package:movies_test/models/movie.dart';
 import 'package:movies_test/services/conexion.dart';
 
 class Data {
@@ -9,17 +8,16 @@ class Data {
   String apiKey = "7e29372022d5809b075319aeced84079";
   static const baseUrl = 'https://api.themoviedb.org/3/';
 
-  Future loadMovies(int page) async {
-    // try {
-    var conexion = Conexion();
-    conexion.setDio(baseUrl);
-    var response =
-        await conexion.dio.get("/movie/popular?api_key=$apiKey&page=$page");
-    var data = response.data["results"];
-    return {"state": true, "response": data};
-    // } catch (e) {
-    //   print(e.toString());
-    //   return {"state": false, "response": e.toString()};
-    // }
+  Future<Map> loadMovies(int page) async {
+    try {
+      var conexion = Conexion();
+      conexion.setDio(baseUrl);
+      var response =
+          await conexion.dio.get("/movie/popular?api_key=$apiKey&page=$page");
+      var data = response.data["results"];
+      return {"state": true, "response": data};
+    } catch (e) {
+      return {"state": false, "response": e.toString()};
+    }
   }
 }
