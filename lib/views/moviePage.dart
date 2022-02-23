@@ -11,9 +11,10 @@ class MoviesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<MovieController>(
         init: MovieController(),
-        builder: (context) {
+        builder: (controll) {
           return Container(
             color: Colors.white,
+            child: !controll.reload ? Text("data") : Text("reconectar"),
           );
         });
   }

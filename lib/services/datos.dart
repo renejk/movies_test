@@ -15,7 +15,8 @@ class Data {
       var response =
           await conexion.dio.get("/movie/popular?api_key=$apiKey&page=$page");
       var data = response.data["results"];
-      return {"state": true, "response": data};
+      var totalPages = response.data["total_pages"];
+      return {"state": true, "response": data, "totalPages": totalPages};
     } catch (e) {
       return {"state": false, "response": e.toString()};
     }
