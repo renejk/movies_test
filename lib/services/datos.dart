@@ -10,15 +10,18 @@ class Data {
 
   Future<Map> loadMovies(int page) async {
     try {
+      //inicializar conexion
       var conexion = Conexion();
+      //inicializar dio
       conexion.setDio(baseUrl);
+      //consulta api
       var response =
           await conexion.dio.get("/movie/popular?api_key=$apiKey&page=$page");
       var data = response.data["results"];
-      var totalPages = response.data["total_pages"];
-      return {"state": true, "response": data, "totalPages": totalPages};
+      //respuesta en mapa
+      return {"succes": true, "response": data};
     } catch (e) {
-      return {"state": false, "response": e.toString()};
+      return {"succes": false, "response": e.toString()};
     }
   }
 }

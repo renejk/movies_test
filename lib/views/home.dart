@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:movies_test/controllers/movieController.dart';
-
-import 'moviePage.dart';
+import 'movie_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,10 +10,10 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        centerTitle: true,
+        // centerTitle: true,
         toolbarHeight: 80,
         title: const Text(
-          'Movies',
+          'Trending',
           style: TextStyle(
               color: Colors.black, fontSize: 30, fontFamily: "Poppins"),
         ),

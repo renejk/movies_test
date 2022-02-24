@@ -1,4 +1,5 @@
 class Movie {
+  //variables
   late int id, voteCount;
   late bool adult, video;
   late double voteAverage;
@@ -9,7 +10,7 @@ class Movie {
       posterPath,
       releaseDate,
       title;
-
+//constructor
   Movie({
     required this.id,
     required this.adult,
@@ -24,7 +25,7 @@ class Movie {
     required this.voteAverage,
     required this.voteCount,
   });
-
+//metodo estatico para parsear json a un objeto de la clase
   static fromJson(Map<String, dynamic> json) {
     var average = json['vote_average'].runtimeType == int
         ? json['vote_average'].toDouble()
