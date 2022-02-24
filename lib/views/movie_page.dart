@@ -33,12 +33,8 @@ class MoviesPage extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         Expanded(
-                                          child: Image.network(
-                                            controll
-                                                .loadImage(movie.posterPath),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
+                                          child: TrendingWidget(movie: movie),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -66,18 +62,7 @@ class MoviesPage extends StatelessWidget {
                           child: Row(
                               children: controll.news
                                   .map(
-                                    (e) => Container(
-                                      height: 200,
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                          controll.loadImage(e.posterPath),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
+                                    (e) => NewsWidget(e: e),
                                   )
                                   .toList()),
                         )
@@ -93,6 +78,127 @@ class MoviesPage extends StatelessWidget {
                   ),
                 ),
         ]);
+      },
+    );
+  }
+}
+
+class NewsWidget extends StatelessWidget {
+  const NewsWidget({
+    Key? key,
+    required this.e,
+  }) : super(key: key);
+  final Movie e;
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<MovieController>(
+        init: MovieController(),
+        builder: (controll) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(PageRouteBuilder(
+                  opaque: false,
+                  barrierDismissible: true,
+                  pageBuilder: (BuildContext context, _, __) {
+                    return GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        color: Colors.black38,
+                        alignment: Alignment.center,
+                        child: Material(
+                          color: Colors.redAccent.withOpacity(0.0),
+                          child: Hero(
+                            tag: "image_${e.id}",
+                            child: Stack(
+                              children: [
+                                Image.network(
+                                  controll.loadImage(e.posterPath),
+                                  fit: BoxFit.cover,
+                                  height: 400.00,
+                                  width: 300.0,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }));
+            },
+            child: Container(
+              height: 200,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Hero(
+                  tag: "image_${e.id}",
+                  child: Image.network(
+                    controll.loadImage(e.posterPath),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+}
+
+class TrendingWidget extends StatelessWidget {
+  const TrendingWidget({
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<MovieController>(
+      init: MovieController(),
+      builder: (controll) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                opaque: false,
+                barrierDismissible: true,
+                pageBuilder: (BuildContext context, _, __) {
+                  return GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      color: Colors.black38,
+                      alignment: Alignment.center,
+                      child: Material(
+                        color: Colors.redAccent.withOpacity(0.0),
+                        child: Hero(
+                          tag: "image_${movie.id}",
+                          child: Stack(
+                            children: [
+                              Image.network(
+                                controll.loadImage(movie.posterPath),
+                                fit: BoxFit.cover,
+                                height: 400.00,
+                                width: 300.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+          child: Hero(
+            tag: "image_${movie.id}",
+            child: Image.network(
+              controll.loadImage(movie.posterPath),
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
       },
     );
   }
